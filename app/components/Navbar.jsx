@@ -11,10 +11,10 @@ var Nav = () => {
                             Timer App
                         </li>
                         <li>
-                            <IndexLink to= "/" activeClassName="active-link">Timer</IndexLink>
+                            <IndexLink to='/' activeClassName="active">Timer </IndexLink>
                         </li>
                         <li>
-                            <IndexLink to= "/" activeClassName="active-link">Countdown</IndexLink>
+                            <Link to='countdown' activeClassName="active"> Countdown </Link>
                         </li>
                     </ul>
                 </div>
