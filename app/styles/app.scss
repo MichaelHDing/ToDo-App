@@ -4,11 +4,3 @@
 @import "base/foundation-settings";
 @import "foundation";
 @include foundation-everything;
-
-//components
-@import "components/navigation";
-@import "components/clock";
-@import "components/controls.scss";
-@import "components/page-titles.scss";
-
-
