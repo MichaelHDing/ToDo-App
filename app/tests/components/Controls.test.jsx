@@ -4,24 +4,24 @@ var expect = require('expect');
 var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 
-var CountdownControls = require('CountdownControls');
+var Controls = require('Controls');
 
-describe('CountdownControls', () => {
+describe('Controls', () => {
     describe('Existance', () => {
         it('should exist', () => {
-            expect(CountdownControls).toExist();
+            expect(Controls).toExist();
         });
     });
     describe('Renderability', () =>{
         it('should render pause to the screen when started', ()=>{
-            var contr = TestUtils.renderIntoDocument(<CountdownControls returnStatus = 'started'/>);
+            var contr = TestUtils.renderIntoDocument(<Controls returnStatus = 'started'/>);
             var $el = $(ReactDOM.findDOMNode(contr));
             var $pauseButton = $el.find('button:contains(Pause)');
 
             expect($pauseButton.length).toBe(1);
         });
         it('should render start to the screen when paused', ()=>{
-            var contr = TestUtils.renderIntoDocument(<CountdownControls returnStatus = 'paused'/>);
+            var contr = TestUtils.renderIntoDocument(<Controls returnStatus = 'paused'/>);
             var $el = $(ReactDOM.findDOMNode(contr));
             var $startButton = $el.find('button:contains(Start)');
 

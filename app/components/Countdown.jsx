@@ -1,7 +1,7 @@
 var React = require('react');
 var Clock = require('Clock');
 var CountdownForm = require('CountdownForm');
-var CountdownControls = require('CountdownControls');
+var Controls = require('Controls');
 
 var Countdown = React.createClass({
     getInitialState: function () {
@@ -57,7 +57,7 @@ var Countdown = React.createClass({
         var { count, countStatus } = this.state;
         var statusRender = () => {
             if (countStatus !== "default") {
-                return <CountdownControls returnStatus={countStatus} onStatus={this.handleStatus} />
+                return <Controls returnStatus={countStatus} onStatus={this.handleStatus} />
             } else {
                 return <CountdownForm onUpdate={this.handleUpdate} />
             }

@@ -1,6 +1,6 @@
 var React = require('react');
 
-var CountdownControls = React.createClass({
+var Controls = React.createClass({
     propTypes: {
         returnStatus: React.PropTypes.string.isRequired,
         onStatus: React.PropTypes.func.isRequired
@@ -15,7 +15,7 @@ var CountdownControls = React.createClass({
         var renderStartStop = (() => {
             if (returnStatus === 'started') {
                 return <button className="button secondary" onClick={this.onStatus('paused')}>Pause</button>
-            } else if (returnStatus === 'paused') {
+            } else {
                 return <button className="button primary" onClick={this.onStatus('started')}>Start</button>
             }
         });
@@ -28,4 +28,4 @@ var CountdownControls = React.createClass({
     }
 });
 
-module.exports = CountdownControls;
+module.exports = Controls;
