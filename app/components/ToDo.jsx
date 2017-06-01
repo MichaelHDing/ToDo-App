@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Main = (props) => {
+var ToDo = (props) => {
     return (
         <div>
             {props.children}
@@ -8,4 +8,4 @@ var Main = (props) => {
     );
 }
 
-module.exports = Main;
+module.exports = ToDo;
