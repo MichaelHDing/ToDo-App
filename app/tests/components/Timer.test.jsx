@@ -38,6 +38,7 @@ describe('Timer', () => {
         });
         it('should destroy the timer when stopped', (done) => {
             var timer = TestUtils.renderIntoDocument(<Timer />);
+            timer.setState({time: 10});
             timer.handleStatus('stopped');
             setTimeout(() => {
                 expect(timer.state.time).toBe(0);
