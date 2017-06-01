@@ -1,3 +1,3 @@
-# React Template
+# To Do App
 
-Default template for any react app
+App that creates a ToDo list with limited functionalityß
