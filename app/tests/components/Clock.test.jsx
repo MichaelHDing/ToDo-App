@@ -11,7 +11,6 @@ describe('Clock', () => {
         it('should exist', () => {
             expect(Clock).toExist();
         });
-
     });
     describe('Functionality: formatSeconds()', () => {
         it('should format correctly', () => {
