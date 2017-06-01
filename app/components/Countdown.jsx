@@ -7,7 +7,7 @@ var Countdown = React.createClass({
     getInitialState: function () {
         return {
             count: 0,
-            countStatus: 'reset'
+            countStatus: 'default'
         };
     },
     componentDidUpdate: function (prevProps, prevState) {
@@ -16,7 +16,7 @@ var Countdown = React.createClass({
                 case 'started':
                     this.startTimer();
                     break;
-                case 'reset':
+                case 'default':
                     this.setState({ count: 0 });
                 case 'paused':
                     clearInterval(this.timer);
@@ -25,12 +25,21 @@ var Countdown = React.createClass({
             }
         }
     },
+    componentWillUnmount: function (){
+        clearInterval(this.timer);
+        this.timer = undefined;
+    },
     startTimer: function () {
         this.timer = setInterval(() => {
             var newCount = this.state.count - 1;
             this.setState({
                 count: newCount >= 0 ? newCount : 0
             });
+            if(newCount === 0) {
+                this.setState({
+                    countStatus: 'default'
+                });
+            }
         }, 1000);
     },
     handleUpdate: function (countStr) {
@@ -39,7 +48,7 @@ var Countdown = React.createClass({
             countStatus: 'started'
         });
     },
-    handlePauseReset: function (newStat) {
+    handleStatus: function (newStat) {
         this.setState({
             countStatus: newStat
         })
@@ -47,8 +56,8 @@ var Countdown = React.createClass({
     render: function () {
         var { count, countStatus } = this.state;
         var statusRender = () => {
-            if (countStatus !== "reset") {
-                return <CountdownControls returnStatus={countStatus} onPauseReset={this.handlePauseReset} />
+            if (countStatus !== "default") {
+                return <CountdownControls returnStatus={countStatus} onStatus={this.handleStatus} />
             } else {
                 return <CountdownForm onUpdate={this.handleUpdate} />
             }
