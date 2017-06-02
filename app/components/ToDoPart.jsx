@@ -4,27 +4,25 @@ var moment = require('moment');
 var ToDoPart = React.createClass({
     render: function () {
         var { id, text, done, timeStart, timeStop } = this.props;
+        var todoClassName = done ? 'todo todoDone' : 'todo';
         var renderTimes = () => {
             if (timeStop === undefined) {
-                return (
-                    <p>Created At: {moment.unix(timeStart).format('MMMM Do, YYYY @ HH:mm:ss A')}</p>
-                );
+                return 'Created At: ' +  moment.unix(timeStart).format('MMMM Do, YYYY @ HH:mm:ss A');
             } else {
-                return (
-                    <div>
-                        <p>Created At: {moment.unix(timeStart).format('MMMM Do, YYYY @ HH:mm:ss A')}</p>
-                        <p>Finished At: {moment.unix(timeStop).format('MMMM Do, YYYY @ HH:mm:ss A')}</p>
-                    </div>
-                );
+                return 'Completed At: ' +  moment.unix(timeStop).format('MMMM Do, YYYY @ HH:mm:ss A');
             }
         };
         return (
-            <div onClick={() => {
+            <div className={todoClassName} onClick={() => {
                 this.props.onToggle(id);
             }}>
-                <input type="checkbox" checked={done} />
-                {text}
-                {renderTimes()}
+                <div>
+                    <input type="checkbox" checked={done} />
+                </div>
+                <div>
+                    <p>{text}</p>
+                    <p className="todo__subtext">{renderTimes()}</p>
+                </div>
             </div>
         );
     }

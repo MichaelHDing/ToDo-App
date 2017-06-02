@@ -26,4 +26,13 @@ describe('ToDoList', () => {
 
         });
     });
+    describe('Functionality: rendering correct number of todo\'s', () => {
+        it('should render message if nothing to do', () => {
+            var todoTemp = [];
+            var todolist = TestUtils.renderIntoDocument(<ToDoList list={todoTemp} />);
+            var $el = $(ReactDOM.findDOMNode(todolist));
+            expect($el.find('.container__message').length).toBe(1);
+
+        });
+    });
 });

@@ -41,11 +41,7 @@ var ToDo = React.createClass({
         var updated = this.state.listToDo.map((element) => {
             if (element.id === id) {
                 element.done = !element.done;
-                if(element.done) {
-                    element.timeStop = moment().unix();
-                } else {
-                    element.timeStop = undefined;
-                }
+                element.timeStop = element.done? moment().unix() : undefined;
             }
             return element;
         });
@@ -56,10 +52,16 @@ var ToDo = React.createClass({
         var filteredToDos = ToDoAPI.filterToDos(listToDo, show, search);
         return (
             <div>
-                <h1>ToDo App</h1>
-                <Search onSearch={this.handleSearch} />
-                <ToDoList list={filteredToDos} onToggle={this.handleToggle} />
-                <AddToDo onAdd={this.handleAdd} />
+                <h1 className="page-title">ToDo App</h1>
+                <div className="row">
+                    <div className="column small-centered small-11 medium-6 large-5">
+                        <div className= "container">
+                            <Search onSearch={this.handleSearch} />
+                            <ToDoList list={filteredToDos} onToggle={this.handleToggle} />
+                            <AddToDo onAdd={this.handleAdd} />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
