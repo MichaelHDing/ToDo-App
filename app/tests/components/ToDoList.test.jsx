@@ -26,17 +26,4 @@ describe('ToDoList', () => {
 
         });
     });
-    describe('Functionality: rendering correct number of todo\'s', () => {
-        it('should have the same number of todo components as elements in the todo array', () => {
-            var todoTemp = [{
-                id: 1, text: 'thing1'
-            }, {
-                id: 2, text: 'thing2'
-            }];
-            var todolist = TestUtils.renderIntoDocument(<ToDoList list={todoTemp} />);
-            var todoComps = TestUtils.scryRenderedComponentsWithType(todolist, ToDoPart);
-            expect(todoComps.length).toBe(todoTemp.length);
-
-        });
-    });
 });

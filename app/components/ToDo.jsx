@@ -1,5 +1,6 @@
 var React = require('react');
 var uuid = require('node-uuid');
+var moment = require('moment');
 
 var AddToDo = require('AddToDo');
 var Search = require('Search');
@@ -14,7 +15,7 @@ var ToDo = React.createClass({
             listToDo: ToDoAPI.getToDos()
         };
     },
-    componentDidUpdate: function() {
+    componentDidUpdate: function () {
         ToDoAPI.setToDos(this.state.listToDo);
     },
     handleSearch: function (showCheck, searchTerm) {
@@ -25,15 +26,26 @@ var ToDo = React.createClass({
     },
     handleAdd: function (addTerm) {
         var listToDo = this.state.listToDo
-        var idAdd = listToDo.length + 1;
         this.setState({
-            listToDo: listToDo.concat({ id: uuid(), text: addTerm, done: false })
+            listToDo: listToDo.concat(
+                {
+                    id: uuid(),
+                    text: addTerm,
+                    done: false,
+                    timeStart: moment().unix(),
+                    timeStop: undefined
+                })
         });
     },
     handleToggle: function (id) {
         var updated = this.state.listToDo.map((element) => {
             if (element.id === id) {
                 element.done = !element.done;
+                if(element.done) {
+                    element.timeStop = moment().unix();
+                } else {
+                    element.timeStop = undefined;
+                }
             }
             return element;
         });
@@ -46,7 +58,7 @@ var ToDo = React.createClass({
             <div>
                 <h1>ToDo App</h1>
                 <Search onSearch={this.handleSearch} />
-                <ToDoList list={filteredToDos} onToggle={this.handleToggle}/>
+                <ToDoList list={filteredToDos} onToggle={this.handleToggle} />
                 <AddToDo onAdd={this.handleAdd} />
             </div>
         );

@@ -13,8 +13,8 @@ describe('ToDo', () => {
         });
     });
     describe('Functionality: adding todos', () => {
+        var addtolist = 'task1';
         it('should update the todolist ass terms are added', () => {
-            var addtolist = 'task1';
             var todo = TestUtils.renderIntoDocument(<ToDo />);
             todo.setState({
                 listToDo: []
@@ -53,5 +53,34 @@ describe('ToDo', () => {
             expect(todo.state.listToDo[0].done).toBe(false);
             expect(todo.state.listToDo[1].done).toBe(false);
         });
+    });
+    describe('Functionality: timing', () => {
+        it('should give a timeStart value when started', () => {
+            var todo = TestUtils.renderIntoDocument(<ToDo />);
+            todo.setState({ listToDo: [] });
+            todo.handleAdd('test');
+
+            expect(todo.state.listToDo[0].timeStart).toBeA('number');
+        });
+        it('should give a timeStopp value when stopped', () => {
+            var todo = TestUtils.renderIntoDocument(<ToDo />);
+            todo.setState({
+                listToDo: [
+                    { id: 0, text: 'test', done: false, timeStart: 0, timeStop: undefined },
+                ]
+            });
+            todo.handleToggle(0);
+            expect(todo.state.listToDo[0].timeStop).toBeA('number');
+        });
+        it('should reset the timeStop when true to false', () => {
+            var todo = TestUtils.renderIntoDocument(<ToDo />);
+            todo.setState({
+                listToDo: [
+                    { id: 0, text: 'test', done: true, timeStart: 0, timeStop: undefined },
+                ]
+            });
+            todo.handleToggle(0);
+            expect(todo.state.listToDo[0].timeStop).toBeA('undefined');
+        }); 
     });
 });

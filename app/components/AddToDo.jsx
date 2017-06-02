@@ -1,12 +1,14 @@
 var React = require('react');
+//var moment = require('moment');
 
 var AddToDo = React.createClass({
     onAdd: function (e) {
         e.preventDefault();
         var retVal = this.refs.submission.value;
+        //var momentPass = moment().unix();
         if (retVal.length > 0) {
             this.refs.submission.value = '';
-            this.props.onAdd(retVal);
+            this.props.onAdd(retVal/*, momentPass*/);
         } else {
             this.refs.submission.focus();
         }
