@@ -1,23 +1,27 @@
 var React = require('react');
 
 var Search = React.createClass({
-    onSearch: function () {
-        var retVal = this.refs.submission.value;
-        var boolCheck = this.refs.boolCheck.checked;
-        this.props.onSearch(retVal, boolCheck);
-    },
-    render: function () {
-        return (
-            <div>
-                <div>
-                    <input type="search" ref="submission" onChange={this.onSearch} placeholder="Search for ToDo's" />
-                </div>
-                <div>
-                    <input type="checkbox" ref="boolCheck" onChange={this.onSearch} />Show Completed ToDo's
-                </div>
-            </div>
-        )
-    }
+  handleSearch: function () {
+    var boolCheck = this.refs.boolCheck.checked;
+    var searchText = this.refs.searchText.value;
+
+    this.props.onSearch(boolCheck, searchText);
+  },
+  render: function () {
+    return (
+      <div>
+        <div>
+          <input type="search" ref="searchText" placeholder="Search todos" onChange={this.handleSearch}/>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" ref="boolCheck" onChange={this.handleSearch}/>
+            Show Completed ToDo's
+          </label>
+        </div>
+      </div>
+    )
+  }
 });
 
 module.exports = Search;

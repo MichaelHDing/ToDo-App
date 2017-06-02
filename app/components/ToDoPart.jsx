@@ -1,10 +1,16 @@
 var React = require('react');
 
 var ToDoPart = React.createClass({
-    render: function() {
-        var {id, text} = this.props
+    render: function () {
+        var { id, text, done} = this.props;
+
         return (
-            <div>{id}. {text}</div>
+            <div onClick={() => {
+                this.props.onToggle(id);
+            }}>
+                <input type="checkbox" checked={done} />
+                {text}
+            </div>
         );
     }
 });
